@@ -16,7 +16,7 @@ public class OfferResourceTest {
 		this.offers = new OfferResource();
 		this.offers.deleteAllOffers();
 		
-		Offer offer = new Offer("my description", null);
+		Offer offer = new Offer("my description", null, null);
 		
 		this.offers.addNewOffer(offer);
 	}
@@ -40,7 +40,7 @@ public class OfferResourceTest {
 		this.offers = new OfferResource();
 		this.offers.deleteAllOffers();
 		
-		Offer offer = new Offer("my description", null);
+		Offer offer = new Offer("my description", null, null);
 		this.offers.addNewOffer(offer);
 		this.offers.addNewOffer(offer);
 		this.offers.addNewOffer(offer);
@@ -55,7 +55,7 @@ public class OfferResourceTest {
 	public void add_new_offer_via_rest_method() throws IOException {
 		this.offers.deleteAllOffers();
 		
-		this.offers.newOffer("testApi", 0, 0, 0, null);
+		this.offers.newOffer("testApi", 0, 0, 0, null, null);
 		
 		Assert.assertEquals("testApi", this.offers.getXML("0").getDescription());
 	}
@@ -64,15 +64,24 @@ public class OfferResourceTest {
 	public void expiry_gets_set() throws IOException {
 		this.offers.deleteAllOffers();
 		
-		this.offers.newOffer("testApi", 1, 2, 3, null);
+		this.offers.newOffer("testApi", 1, 2, 3, null, null);
 		
 		Assert.assertNotNull(this.offers.getXML("0").getExpiryDate());
 	}
 	
 	@Test
+	public void currency_gets_set() throws IOException {
+		this.offers.deleteAllOffers();
+		
+		this.offers.newOffer("testApi", 1, 2, 3, "USD", null);
+		
+		Assert.assertEquals("USD", this.offers.getXML("0").getCurrency());
+	}
+	
+	@Test
 	public void offer_can_be_cancelled() throws IOException {
 		this.offers.deleteAllOffers();
-		this.offers.newOffer("testApi", 1, 2, 3, null);
+		this.offers.newOffer("testApi", 1, 2, 3, null, null);
 		
 		Assert.assertEquals(EStatus.LIVE.name(), this.offers.getXML("0").getStatus());
 		this.offers.cancelOffer("0", null);

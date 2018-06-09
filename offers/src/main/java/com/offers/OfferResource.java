@@ -80,6 +80,7 @@ public class OfferResource {
     		@QueryParam("expiryInHours") int hours,
     		@QueryParam("expiryInMinutes") int minutes,
     		@QueryParam("expiryInSeconds") int seconds,
+    		@QueryParam("currency") String currency,
             @Context HttpServletResponse servletResponse) throws IOException {
 		
 		Date expiryDate = null;
@@ -93,7 +94,7 @@ public class OfferResource {
 			expiryDate = cal.getTime();
 		}
 		
-		Offer offer = new Offer(description, expiryDate);
+		Offer offer = new Offer(description, expiryDate, currency);
 		addNewOffer(offer);
     }
 	

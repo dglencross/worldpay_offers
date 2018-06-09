@@ -18,18 +18,24 @@ public class OfferTest {
 	}
 	
 	@Test
-	public void test_instantiation() {
+	public void instantiation() {
 		Assert.assertNotNull(this.offer);
 	}
 	
 	@Test
-	public void test_description_set_on_instantiation() {
-		this.offer = new Offer("test", null);
+	public void description_set_on_instantiation() {
+		this.offer = new Offer("test", null, "GBP");
 		Assert.assertEquals("test", this.offer.getDescription());
 	}
 	
 	@Test
-	public void test_timestamp_set_on_instantiation() {
+	public void currency_set_on_instantiation() {
+		this.offer = new Offer("test", null, "GBP");
+		Assert.assertEquals("GBP", this.offer.getCurrency());
+	}
+	
+	@Test
+	public void timestamp_set_on_instantiation() {
 		Assert.assertNotNull(this.offer.getTimeCreated());
 	}
 	
@@ -54,7 +60,7 @@ public class OfferTest {
 	@Test
 	public void offer_expires_after_expiry_date() {
 		// pick a time in the past
-		this.offer = new Offer("desc", Date.from(Instant.parse("2007-12-03T10:15:30.00Z")));
+		this.offer = new Offer("desc", Date.from(Instant.parse("2007-12-03T10:15:30.00Z")), "GBP");
 		
 		Assert.assertEquals(EStatus.EXPIRED.name(), this.offer.getStatus());
 	}

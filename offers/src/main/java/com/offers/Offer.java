@@ -21,14 +21,15 @@ public class Offer {
 	private Date expiryDate;
 	
 	public Offer() {
-		this(null, null);
+		this(null, null, null);
 	}
 	
-	public Offer(String description, Date offerExpiry) {
+	public Offer(String description, Date offerExpiry, String currency) {
 		this.description = description;
 		this.timeCreated = Date.from(Instant.now());
 		this.status = EStatus.LIVE;
 		this.expiryDate = offerExpiry;
+		this.currency = currency;
 	}
 	
 	@XmlElement
@@ -77,6 +78,11 @@ public class Offer {
 	@XmlElement
 	public Date getExpiryDate() {
 		return this.expiryDate;
+	}
+
+	@XmlElement
+	public String getCurrency() {
+		return currency;
 	}
 	
 }
