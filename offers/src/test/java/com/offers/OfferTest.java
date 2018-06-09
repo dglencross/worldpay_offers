@@ -37,4 +37,16 @@ public class OfferTest {
 		Assert.assertEquals("123", this.offer.getId());
 	}
 	
+	@Test
+	public void new_offer_is_live() {
+		Assert.assertEquals(EStatus.LIVE.name(), this.offer.getStatus());
+	}
+	
+	@Test
+	public void canceled_offer_has_correct_status() {
+		this.offer.cancel();
+		
+		Assert.assertEquals(EStatus.CANCELLED.name(), this.offer.getStatus());
+	}
+	
 }

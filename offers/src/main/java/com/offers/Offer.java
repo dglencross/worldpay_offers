@@ -16,6 +16,7 @@ public class Offer {
 	private String description;
 	private Date timeCreated;
 	private String id;
+	private EStatus status;
 	
 	public Offer() {
 		this(null);
@@ -24,6 +25,7 @@ public class Offer {
 	public Offer(String description) {
 		this.description = description;
 		this.timeCreated = Date.from(Instant.now());
+		this.status = EStatus.LIVE;
 	}
 	
 	@XmlElement
@@ -45,8 +47,21 @@ public class Offer {
 		return this.id;
 	}
 	
+	@XmlElement
+	public String getStatus() {
+		return this.status.name();
+	}
+	
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public void cancel() {
+		setStatus(EStatus.CANCELLED);
+	}
+	
+	public void setStatus(EStatus status) {
+		this.status = status;
 	}
 	
 }
