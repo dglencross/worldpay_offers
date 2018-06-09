@@ -15,6 +15,7 @@ public class Offer {
 
 	private String description;
 	private Date timeCreated;
+	private String id;
 	
 	public Offer() {
 		this(null);
@@ -33,6 +34,15 @@ public class Offer {
 	@XmlElement
 	public Date getTimeCreated() {
 		return this.timeCreated;
+	}
+	
+	@XmlElement
+	public String getId() {
+		return this.id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }
