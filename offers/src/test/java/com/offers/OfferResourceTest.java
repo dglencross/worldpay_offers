@@ -55,9 +55,18 @@ public class OfferResourceTest {
 	public void add_new_offer_via_rest_method() throws IOException {
 		this.offers.deleteAllOffers();
 		
-		this.offers.newOffer("testApi", null);
+		this.offers.newOffer("testApi", 0, 0, 0, null);
 		
 		Assert.assertEquals("testApi", this.offers.getXML("0").getDescription());
+	}
+	
+	@Test
+	public void expiry_gets_set() throws IOException {
+		this.offers.deleteAllOffers();
+		
+		this.offers.newOffer("testApi", 1, 2, 3, null);
+		
+		Assert.assertNotNull(this.offers.getXML("0").getExpiryDate());
 	}
 	
 }

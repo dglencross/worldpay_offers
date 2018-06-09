@@ -1,6 +1,9 @@
 package com.offers;
 
 import java.io.IOException;
+import java.time.Instant;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -74,8 +77,23 @@ public class OfferResource {
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_JSON)
     public void newOffer(@QueryParam("description") String description,
+    		@QueryParam("expiryInHours") int hours,
+    		@QueryParam("expiryInMinutes") int minutes,
+    		@QueryParam("expiryInSeconds") int seconds,
             @Context HttpServletResponse servletResponse) throws IOException {
-		Offer offer = new Offer(description, null);
+		
+		Date expiryDate = null;
+		if (hours + minutes + seconds > 0) {
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(new Date());
+			cal.add(Calendar.HOUR_OF_DAY, hours);
+			cal.add(Calendar.MINUTE, minutes);
+			cal.add(Calendar.SECOND, seconds);
+			
+			expiryDate = cal.getTime();
+		}
+		
+		Offer offer = new Offer(description, expiryDate);
 		addNewOffer(offer);
     }
 	
