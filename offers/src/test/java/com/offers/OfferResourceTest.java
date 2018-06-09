@@ -14,8 +14,11 @@ public class OfferResourceTest {
 	}
 	
 	@Test
-	public void Hello_World_Is_Returned() {
-		Assert.assertEquals("Hello World", this.offers.helloWorldTest());
+	public void Offer_Is_Returned() {
+		Offer xml = this.offers.getXML();
+		
+		Assert.assertEquals("my description", xml.GetDescription());
+		
 	}
 	
 }

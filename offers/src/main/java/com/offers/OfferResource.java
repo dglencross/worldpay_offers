@@ -9,9 +9,11 @@ import javax.ws.rs.core.MediaType;
 public class OfferResource {
 
 	@GET
-	@Produces(MediaType.TEXT_PLAIN)
-	public String helloWorldTest() {
-		return "Hello World";
+	@Produces(MediaType.APPLICATION_XML)
+	public Offer getXML() {
+		Offer offer = new Offer("my description");
+		
+		return offer;
 	}
 	
 }
