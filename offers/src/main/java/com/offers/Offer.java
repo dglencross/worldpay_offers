@@ -17,15 +17,18 @@ public class Offer {
 	private Date timeCreated;
 	private String id;
 	private EStatus status;
+	private String currency;
+	private Date offerExpiry;
 	
 	public Offer() {
-		this(null);
+		this(null, null);
 	}
 	
-	public Offer(String description) {
+	public Offer(String description, Date offerExpiry) {
 		this.description = description;
 		this.timeCreated = Date.from(Instant.now());
 		this.status = EStatus.LIVE;
+		this.offerExpiry = offerExpiry;
 	}
 	
 	@XmlElement
@@ -49,6 +52,11 @@ public class Offer {
 	
 	@XmlElement
 	public String getStatus() {
+		// check if we have expired first
+		if (null != offerExpiry && offerExpiry.before(Date.from(Instant.now()))) {
+			this.status = EStatus.EXPIRED;
+		}
+		
 		return this.status.name();
 	}
 	
@@ -57,7 +65,9 @@ public class Offer {
 	}
 
 	public void cancel() {
-		setStatus(EStatus.CANCELLED);
+		if (getStatus().equals(EStatus.LIVE.name())) {
+			setStatus(EStatus.CANCELLED);
+		}
 	}
 	
 	public void setStatus(EStatus status) {

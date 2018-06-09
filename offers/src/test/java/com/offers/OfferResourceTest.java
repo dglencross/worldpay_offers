@@ -14,8 +14,9 @@ public class OfferResourceTest {
 	@Before
 	public void setUp() {
 		this.offers = new OfferResource();
+		this.offers.deleteAllOffers();
 		
-		Offer offer = new Offer("my description");
+		Offer offer = new Offer("my description", null);
 		
 		this.offers.addNewOffer(offer);
 	}
@@ -39,7 +40,7 @@ public class OfferResourceTest {
 		this.offers = new OfferResource();
 		this.offers.deleteAllOffers();
 		
-		Offer offer = new Offer("my description");
+		Offer offer = new Offer("my description", null);
 		this.offers.addNewOffer(offer);
 		this.offers.addNewOffer(offer);
 		this.offers.addNewOffer(offer);
