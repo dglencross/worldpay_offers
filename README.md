@@ -14,6 +14,14 @@ Running the project:
   - Deploy to any server, Tomcat was used in the development
   - Use a REST client to connect to the project and run test queries
 
+Assumptions made:
+ - Pricing information etc is included in the description
+ - No client is included, instructions for running are below
+ - All 'Offers' are stored in memory, so will not be retained when closing the server
+ - Offers can't be cancelled after they have expired
+ - Users can only specify expiry time in hours, minutes and seconds
+ - Offers can't be deleted, they can only be 'Cancelled'. Requirement did not specify deletion so I didn't implement it.
+
 Base URL should be e.g.
 http://localhost:8080
 
@@ -41,11 +49,3 @@ Offer will show as status CANCELLED
 GET
 http://localhost:8080/offers/rest/offers/allOffers
 All offers will be listed
-
-Assumptions made:
- - Pricing information etc is included in the description
- - No client is included, instructions for running are below
- - All 'Offers' are stored in memory, so will not be retained when closing the server
- - Offers can't be cancelled after they have expired
- - Users can only specify expiry time in hours, minutes and seconds
- - Offers can't be deleted, they can only be 'Cancelled'. Requirement did not specify deletion so I didn't implement it.
