@@ -3,15 +3,17 @@ package com.offers;
 import java.time.Instant;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Class to represent one offer
  * @author dave
- *
  */
+@XmlRootElement
 public class Offer {
 
-	public String description;
-	public Date timeCreated;
+	private String description;
+	private Date timeCreated;
 	
 	public Offer() {
 		this(null);
