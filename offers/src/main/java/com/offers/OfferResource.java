@@ -16,4 +16,20 @@ public class OfferResource {
 		return offer;
 	}
 	
+	@GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Offer getJSON() {
+		Offer offer = new Offer("my description");
+		
+		return offer;
+    }
+	
+	@GET
+    @Produces({ MediaType.TEXT_XML })
+    public Offer getHTML() {
+		Offer offer = new Offer("my description");
+		
+		return offer;
+    }
+	
 }

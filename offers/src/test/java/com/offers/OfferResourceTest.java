@@ -17,8 +17,14 @@ public class OfferResourceTest {
 	public void Offer_Is_Returned() {
 		Offer xml = this.offers.getXML();
 		
-		Assert.assertEquals("my description", xml.GetDescription());
+		Assert.assertEquals("my description", xml.getDescription());
+	}
+	
+	@Test
+	public void Offer_Is_Returned_As_HTML() {
+		Offer html = this.offers.getHTML();
 		
+		Assert.assertEquals("my description", html.getDescription());
 	}
 	
 }
