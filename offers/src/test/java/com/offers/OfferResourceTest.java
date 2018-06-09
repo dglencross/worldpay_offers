@@ -69,4 +69,14 @@ public class OfferResourceTest {
 		Assert.assertNotNull(this.offers.getXML("0").getExpiryDate());
 	}
 	
+	@Test
+	public void offer_can_be_cancelled() throws IOException {
+		this.offers.deleteAllOffers();
+		this.offers.newOffer("testApi", 1, 2, 3, null);
+		
+		Assert.assertEquals(EStatus.LIVE.name(), this.offers.getXML("0").getStatus());
+		this.offers.cancelOffer("0", null);
+		Assert.assertEquals(EStatus.CANCELLED.name(), this.offers.getXML("0").getStatus());
+	}
+	
 }

@@ -74,6 +74,7 @@ public class Offer {
 		this.status = status;
 	}
 
+	@XmlElement
 	public Date getExpiryDate() {
 		return this.expiryDate;
 	}

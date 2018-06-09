@@ -97,6 +97,16 @@ public class OfferResource {
 		addNewOffer(offer);
     }
 	
+	@POST
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_JSON)
+	@Path("/cancel/{id}")
+    public void cancelOffer(@PathParam("id") String id,
+            @Context HttpServletResponse servletResponse) throws IOException {
+		Offer offer = getOffer(id);
+		offer.cancel();
+    }
+	
 	private String getNextId() {
 		return String.valueOf(OffersDao.getInstance().getModel().size());
 	}
