@@ -3,6 +3,7 @@ package com.offers;
 import java.time.Instant;
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,11 +25,13 @@ public class Offer {
 		this.timeCreated = Date.from(Instant.now());
 	}
 	
-	public String GetDescription() {
+	@XmlElement
+	public String getDescription() {
 		return this.description;
 	}
 	
-	public Date GetTimeCreated() {
+	@XmlElement
+	public Date getTimeCreated() {
 		return this.timeCreated;
 	}
 	
