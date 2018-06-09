@@ -1,5 +1,6 @@
 package com.offers;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Assert;
@@ -47,6 +48,15 @@ public class OfferResourceTest {
 		
 		Assert.assertNotNull(offers);
 		Assert.assertEquals(3, offers.size());
+	}
+	
+	@Test
+	public void add_new_offer_via_rest_method() throws IOException {
+		this.offers.deleteAllOffers();
+		
+		this.offers.newOffer("testApi", null);
+		
+		Assert.assertEquals("testApi", this.offers.getXML("0").getDescription());
 	}
 	
 }
