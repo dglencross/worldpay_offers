@@ -1,5 +1,7 @@
 package com.offers;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,21 +12,41 @@ public class OfferResourceTest {
 	
 	@Before
 	public void setUp() {
-		this.offers = new OfferResource();
+		this.offers = new OfferResource("0");
+		
+		Offer offer = new Offer("my description");
+		
+		this.offers.addNewOffer(offer);
 	}
 	
 	@Test
-	public void Offer_Is_Returned() {
+	public void offer_Is_Returned() {
 		Offer xml = this.offers.getXML();
 		
 		Assert.assertEquals("my description", xml.getDescription());
 	}
 	
 	@Test
-	public void Offer_Is_Returned_As_HTML() {
+	public void offer_Is_Returned_As_HTML() {
 		Offer html = this.offers.getHTML();
 		
 		Assert.assertEquals("my description", html.getDescription());
+	}
+	
+	@Test
+	public void all_offers_are_returned() {
+		this.offers = new OfferResource();
+		this.offers.deleteAllOffers();
+		
+		Offer offer = new Offer("my description");
+		this.offers.addNewOffer(offer);
+		this.offers.addNewOffer(offer);
+		this.offers.addNewOffer(offer);
+		
+		List<Offer> offers = this.offers.getAllOffersAsXml();
+		
+		Assert.assertNotNull(offers);
+		Assert.assertEquals(3, offers.size());
 	}
 	
 }
