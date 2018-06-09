@@ -4,13 +4,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OffersTest {
+public class OfferResourceTest {
 
-	private Offers offers;
+	private OfferResource offers;
 	
 	@Before
 	public void setUp() {
-		this.offers = new Offers();
+		this.offers = new OfferResource();
 	}
 	
 	@Test
