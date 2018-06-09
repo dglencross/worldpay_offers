@@ -12,7 +12,7 @@ public class OfferResourceTest {
 	
 	@Before
 	public void setUp() {
-		this.offers = new OfferResource("0");
+		this.offers = new OfferResource();
 		
 		Offer offer = new Offer("my description");
 		
@@ -21,14 +21,14 @@ public class OfferResourceTest {
 	
 	@Test
 	public void offer_Is_Returned() {
-		Offer xml = this.offers.getXML();
+		Offer xml = this.offers.getXML("0");
 		
 		Assert.assertEquals("my description", xml.getDescription());
 	}
 	
 	@Test
 	public void offer_Is_Returned_As_HTML() {
-		Offer html = this.offers.getHTML();
+		Offer html = this.offers.getHTML("0");
 		
 		Assert.assertEquals("my description", html.getDescription());
 	}

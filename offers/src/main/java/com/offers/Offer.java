@@ -31,6 +31,10 @@ public class Offer {
 		return this.description;
 	}
 	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 	@XmlElement
 	public Date getTimeCreated() {
 		return this.timeCreated;
