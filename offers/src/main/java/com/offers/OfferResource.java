@@ -1,7 +1,6 @@
 package com.offers;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -60,6 +59,7 @@ public class OfferResource {
     }
 
 	@GET
+	@Path("/allOffers")
 	@Produces(MediaType.APPLICATION_XML)
 	public List<Offer> getAllOffersAsXml() {
 		return  OffersDao.getInstance().getModel().values().stream().collect(Collectors.toList());
