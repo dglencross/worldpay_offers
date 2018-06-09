@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 @Path("/offers")
@@ -76,7 +77,7 @@ public class OfferResource {
 	@POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void newOffer(@QueryParam("description") String description,
+    public Response newOffer(@QueryParam("description") String description,
     		@QueryParam("expiryInHours") int hours,
     		@QueryParam("expiryInMinutes") int minutes,
     		@QueryParam("expiryInSeconds") int seconds,
@@ -96,18 +97,23 @@ public class OfferResource {
 		
 		Offer offer = new Offer(description, expiryDate, currency);
 		addNewOffer(offer);
+		
+		return Response.ok("Offer created with ID: " + offer.getId(), MediaType.TEXT_HTML).build();
     }
 	
 	@POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_JSON)
 	@Path("/cancel/{id}")
-    public void cancelOffer(@PathParam("id") String id,
+    public Response cancelOffer(@PathParam("id") String id,
             @Context HttpServletResponse servletResponse) throws IOException {
 		Offer offer = getOffer(id);
 		offer.cancel();
+		
+		return Response.ok("Offer cancelled with ID: " + offer.getId(), MediaType.TEXT_HTML).build();
     }
 	
+	// IDs are just incremented
 	private String getNextId() {
 		return String.valueOf(OffersDao.getInstance().getModel().size());
 	}
