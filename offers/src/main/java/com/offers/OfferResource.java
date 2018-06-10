@@ -38,9 +38,11 @@ public class OfferResource {
 	public Response getXML(@PathParam("id") String id) {
 		Offer result = getOffer(id);
 		
-		Response response = Response.ok(result, MediaType.APPLICATION_XML).build();
+		if (null == result) {
+			return Response.status(404).build();
+		}
 		
-		return response;
+		return Response.ok(result, MediaType.APPLICATION_XML).build();
 	}
 	
 	@GET
@@ -49,9 +51,11 @@ public class OfferResource {
     public Response getJSON(@PathParam("id") String id) {
 		Offer result = getOffer(id);
 		
-		Response response = Response.ok(result, MediaType.APPLICATION_JSON).build();
+		if (null == result) {
+			return Response.status(404).build();
+		}
 		
-		return response;
+		return Response.ok(result, MediaType.APPLICATION_JSON).build();
     }
 	
 	@GET
@@ -60,9 +64,11 @@ public class OfferResource {
     public Response getHTML(@PathParam("id") String id) {
 		Offer result = getOffer(id);
 		
-		Response response = Response.ok(result, MediaType.TEXT_XML).build();
+		if (null == result) {
+			return Response.status(404).build();
+		}
 		
-		return response;
+		return Response.ok(result, MediaType.TEXT_XML).build();
     }
 
 	@GET

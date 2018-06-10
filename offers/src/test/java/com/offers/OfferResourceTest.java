@@ -3,6 +3,8 @@ package com.offers;
 import java.io.IOException;
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +28,12 @@ public class OfferResourceTest {
 		Offer xml = (Offer) this.offers.getXML("0").getEntity();
 		
 		Assert.assertEquals("my description", xml.getDescription());
+	}
+	
+	@Test
+	public void error_404_is_returned_when_no_offer() {
+		Response missingObject = this.offers.getXML("100");
+		Assert.assertEquals(404, missingObject.getStatus());
 	}
 	
 	@Test
