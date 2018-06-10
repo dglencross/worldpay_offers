@@ -29,34 +29,40 @@ public class OfferResource {
 	}
 	
 	private Offer getOffer(String id) {
-		Offer offer = OffersDao.getInstance().getModel().get(id);
-		
-		if (offer == null) {
-			throw new RuntimeException("Get: Offer with id " + id +  " not found");
-		}
-		
-		return offer;
+		return  OffersDao.getInstance().getModel().get(id);
 	}
 	
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
-	public Offer getXML(@PathParam("id") String id) {
-		return getOffer(id);
+	public Response getXML(@PathParam("id") String id) {
+		Offer result = getOffer(id);
+		
+		Response response = Response.ok(result, MediaType.APPLICATION_XML).build();
+		
+		return response;
 	}
 	
 	@GET
 	@Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Offer getJSON(@PathParam("id") String id) {
-		return getOffer(id);
+    public Response getJSON(@PathParam("id") String id) {
+		Offer result = getOffer(id);
+		
+		Response response = Response.ok(result, MediaType.APPLICATION_JSON).build();
+		
+		return response;
     }
 	
 	@GET
 	@Path("{id}")
     @Produces({ MediaType.TEXT_XML })
-    public Offer getHTML(@PathParam("id") String id) {
-		return getOffer(id);
+    public Response getHTML(@PathParam("id") String id) {
+		Offer result = getOffer(id);
+		
+		Response response = Response.ok(result, MediaType.TEXT_XML).build();
+		
+		return response;
     }
 
 	@GET

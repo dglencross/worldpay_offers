@@ -23,14 +23,14 @@ public class OfferResourceTest {
 	
 	@Test
 	public void offer_Is_Returned() {
-		Offer xml = this.offers.getXML("0");
+		Offer xml = (Offer) this.offers.getXML("0").getEntity();
 		
 		Assert.assertEquals("my description", xml.getDescription());
 	}
 	
 	@Test
 	public void offer_Is_Returned_As_HTML() {
-		Offer html = this.offers.getHTML("0");
+		Offer html = (Offer) this.offers.getXML("0").getEntity();
 		
 		Assert.assertEquals("my description", html.getDescription());
 	}
@@ -57,7 +57,7 @@ public class OfferResourceTest {
 		
 		this.offers.newOffer("testApi", 0, 0, 0, null, null);
 		
-		Assert.assertEquals("testApi", this.offers.getXML("0").getDescription());
+		Assert.assertEquals("testApi", ((Offer)this.offers.getXML("0").getEntity()).getDescription());
 	}
 	
 	@Test
@@ -66,7 +66,7 @@ public class OfferResourceTest {
 		
 		this.offers.newOffer("testApi", 1, 2, 3, null, null);
 		
-		Assert.assertNotNull(this.offers.getXML("0").getExpiryDate());
+		Assert.assertNotNull(((Offer)this.offers.getXML("0").getEntity()).getExpiryDate());
 	}
 	
 	@Test
@@ -75,7 +75,7 @@ public class OfferResourceTest {
 		
 		this.offers.newOffer("testApi", 1, 2, 3, "USD", null);
 		
-		Assert.assertEquals("USD", this.offers.getXML("0").getCurrency());
+		Assert.assertEquals("USD", ((Offer)this.offers.getXML("0").getEntity()).getCurrency());
 	}
 	
 	@Test
@@ -83,9 +83,9 @@ public class OfferResourceTest {
 		this.offers.deleteAllOffers();
 		this.offers.newOffer("testApi", 1, 2, 3, null, null);
 		
-		Assert.assertEquals(EStatus.LIVE.name(), this.offers.getXML("0").getStatus());
+		Assert.assertEquals(EStatus.LIVE.name(), ((Offer)this.offers.getXML("0").getEntity()).getStatus());
 		this.offers.cancelOffer("0", null);
-		Assert.assertEquals(EStatus.CANCELLED.name(), this.offers.getXML("0").getStatus());
+		Assert.assertEquals(EStatus.CANCELLED.name(), ((Offer)this.offers.getXML("0").getEntity()).getStatus());
 	}
 	
 }
