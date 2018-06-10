@@ -27,26 +27,26 @@ http://localhost:8080
 
 Example queries:
 POST
-http://localhost:8080/offers/rest/offers?description="50% off all products for one hour"&expiryInHours=1&currency=GBP
+http://localhost:8080/offers/rest/v1/offers?description="50% off all products for one hour"&expiryInHours=1&currency=GBP
 IDs are added in chronological order so first one is 0
 
 GET
-http://localhost:8080/offers/rest/offers/0
+http://localhost:8080/offers/rest/v1/offers/0
 Displays info of order
 
 POST
-http://localhost:8080/offers/rest/offers?description="Offer expires in one second!"&expiryInSeconds=1&currency=GBP
+http://localhost:8080/offers/rest/v1/offers?description="Offer expires in one second!"&expiryInSeconds=1&currency=GBP
 
 http://localhost:8080/offers/rest/offers/1
 Offer will show as status EXPIRED
 
 PUT
-http://localhost:8080/offers/rest/offers/cancel?id=0
+http://localhost:8080/offers/rest/v1/offers/cancel?id=0
 Message should say id 0 is cancelled
 GET
-http://localhost:8080/offers/rest/offers/0
+http://localhost:8080/offers/rest/v1/offers/0
 Offer will show as status CANCELLED
 
 GET
-http://localhost:8080/offers/rest/offers/allOffers
+http://localhost:8080/offers/rest/v1/offers/allOffers
 All offers will be listed
