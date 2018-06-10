@@ -20,11 +20,8 @@ public class Offer {
 	private String currency;
 	private Date expiryDate;
 	
-	public Offer() {
-		this(null, null, null);
-	}
-	
 	public Offer(String description, Date offerExpiry, String currency) {
+		super();
 		this.description = description;
 		this.timeCreated = Date.from(Instant.now());
 		this.status = EStatus.LIVE;
@@ -32,13 +29,11 @@ public class Offer {
 		this.currency = currency;
 	}
 	
+	// Items exposed to the end user
+	
 	@XmlElement
 	public String getDescription() {
 		return this.description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
 	}
 	
 	@XmlElement
@@ -61,20 +56,6 @@ public class Offer {
 		return this.status.name();
 	}
 	
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public void cancel() {
-		if (getStatus().equals(EStatus.LIVE.name())) {
-			setStatus(EStatus.CANCELLED);
-		}
-	}
-	
-	public void setStatus(EStatus status) {
-		this.status = status;
-	}
-
 	@XmlElement
 	public Date getExpiryDate() {
 		return this.expiryDate;
@@ -85,4 +66,24 @@ public class Offer {
 		return currency;
 	}
 	
+	// End of items exposed to the end user
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void cancel() {
+		if (getStatus().equals(EStatus.LIVE.name())) {
+			setStatus(EStatus.CANCELLED);
+		}
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public void setStatus(EStatus status) {
+		this.status = status;
+	}
+
 }

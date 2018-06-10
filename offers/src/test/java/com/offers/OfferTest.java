@@ -14,7 +14,7 @@ public class OfferTest {
 	
 	@Before
 	public void SetUp() {
-		this.offer = new Offer();
+		this.offer = new Offer(null, null, null);
 	}
 	
 	@Test
