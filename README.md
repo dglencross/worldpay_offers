@@ -40,9 +40,10 @@ http://localhost:8080/offers/rest/offers?description="Offer expires in one secon
 http://localhost:8080/offers/rest/offers/1
 Offer will show as status EXPIRED
 
-POST
+PUT
 http://localhost:8080/offers/rest/offers/cancel?id=0
 Message should say id 0 is cancelled
+GET
 http://localhost:8080/offers/rest/offers/0
 Offer will show as status CANCELLED
 
