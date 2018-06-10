@@ -39,7 +39,7 @@ public class OfferResourceTest {
 	@Test
 	public void error_message_is_returned_when_no_offer() {
 		Response missingObject = this.offers.getXML("100");
-		Assert.assertEquals("No Offer exists with id 100", (String)missingObject.getEntity());
+		Assert.assertTrue(((String)missingObject.getEntity()).contains("No Offer exists with id 100"));
 	}
 	
 	@Test
@@ -122,7 +122,7 @@ public class OfferResourceTest {
 		this.offers.newOffer("testApi", 1, 2, 3, null, null);
 		
 		Assert.assertEquals(EStatus.LIVE.name(), ((Offer)this.offers.getXML("0").getEntity()).getStatus());
-		this.offers.cancelOffer("0", null);
+		this.offers.cancelOffer("0");
 		Assert.assertEquals(EStatus.CANCELLED.name(), ((Offer)this.offers.getXML("0").getEntity()).getStatus());
 	}
 	

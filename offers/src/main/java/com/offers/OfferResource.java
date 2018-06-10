@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-@Path("/offer")
+@Path("/")
 public class OfferResource {
 
 	@Context
@@ -34,7 +34,7 @@ public class OfferResource {
 	}
 	
 	@GET
-	@Path("{id}")
+	@Path("/offer/{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	public Response getXML(@PathParam("id") String id) {
 		Offer result = getOffer(id);
@@ -48,7 +48,7 @@ public class OfferResource {
 	}
 	
 	@GET
-	@Path("{id}")
+	@Path("/offer/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getJSON(@PathParam("id") String id) {
 		Offer result = getOffer(id);
@@ -62,7 +62,7 @@ public class OfferResource {
     }
 	
 	@GET
-	@Path("{id}")
+	@Path("/offer/{id}")
     @Produces({ MediaType.TEXT_XML })
     public Response getHTML(@PathParam("id") String id) {
 		Offer result = getOffer(id);
@@ -83,7 +83,7 @@ public class OfferResource {
 	}
 	
 	@GET
-	@Path("count")
+	@Path("/count")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getCount() {
 		int count = OffersDao.getInstance().getModel().size();
@@ -91,6 +91,7 @@ public class OfferResource {
 	}
 	
 	@POST
+	@Path("/new")
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response newOffer(@QueryParam("description") String description,
@@ -118,12 +119,16 @@ public class OfferResource {
     }
 	
 	@PUT
-    @Produces(MediaType.TEXT_HTML)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.TEXT_XML, MediaType.TEXT_HTML})
 	@Path("/cancel/{id}")
-    public Response cancelOffer(@PathParam("id") String id,
-            @Context HttpServletResponse servletResponse) throws IOException {
+    public Response cancelOffer(@PathParam("id") String id) throws IOException {
 		Offer offer = getOffer(id);
+		
+		if (null == offer) {
+			String error = "No Offer exists with id " + id;
+			return Response.status(404).entity(error).build();
+		}
+		
 		offer.cancel();
 		
 		return Response.ok("Offer cancelled with ID: " + offer.getId(), MediaType.TEXT_HTML).build();
