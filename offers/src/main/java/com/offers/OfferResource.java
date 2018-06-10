@@ -54,7 +54,7 @@ public class OfferResource {
 		Offer result = getOffer(id);
 		
 		if (null == result) {
-			String error = "No Offer exists with id " + id;
+			String error = "{ \"error\" : \"No Offer exists with id " + id + "\"}";
 			return Response.status(404).entity(error).build();
 		}
 		
@@ -101,7 +101,7 @@ public class OfferResource {
             @Context HttpServletResponse servletResponse) throws IOException {
 		
 		Date expiryDate = null;
-		if (hours + minutes + seconds > 0) {
+		if (hours + minutes + seconds > 0) { // i.e. if any of these fields are set - negative makes no sense so won't check for it
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(new Date());
 			cal.add(Calendar.HOUR_OF_DAY, hours);

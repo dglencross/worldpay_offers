@@ -43,6 +43,30 @@ public class OfferResourceTest {
 	}
 	
 	@Test
+	public void json_error_404_is_returned_when_no_offer() {
+		Response missingObject = this.offers.getJSON("100");
+		Assert.assertEquals(404, missingObject.getStatus());
+	}
+	
+	@Test
+	public void json_error_message_is_returned_when_no_offer() {
+		Response missingObject = this.offers.getJSON("100");
+		Assert.assertTrue(((String)missingObject.getEntity()).contains("No Offer exists with id 100"));
+	}
+	
+	@Test
+	public void html_error_404_is_returned_when_no_offer() {
+		Response missingObject = this.offers.getHTML("100");
+		Assert.assertEquals(404, missingObject.getStatus());
+	}
+	
+	@Test
+	public void html_error_message_is_returned_when_no_offer() {
+		Response missingObject = this.offers.getHTML("100");
+		Assert.assertTrue(((String)missingObject.getEntity()).contains("No Offer exists with id 100"));
+	}
+	
+	@Test
 	public void offer_Is_Returned_As_HTML() {
 		Offer html = (Offer) this.offers.getXML("0").getEntity();
 		
