@@ -37,6 +37,12 @@ public class OfferResourceTest {
 	}
 	
 	@Test
+	public void error_message_is_returned_when_no_offer() {
+		Response missingObject = this.offers.getXML("100");
+		Assert.assertEquals("No Offer exists with id 100", (String)missingObject.getEntity());
+	}
+	
+	@Test
 	public void offer_Is_Returned_As_HTML() {
 		Offer html = (Offer) this.offers.getXML("0").getEntity();
 		

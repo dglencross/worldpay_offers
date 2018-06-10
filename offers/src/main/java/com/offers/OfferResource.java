@@ -39,7 +39,8 @@ public class OfferResource {
 		Offer result = getOffer(id);
 		
 		if (null == result) {
-			return Response.status(404).build();
+			String error = "No Offer exists with id " + id;
+			return Response.status(404).entity(error).build();
 		}
 		
 		return Response.ok(result, MediaType.APPLICATION_XML).build();
@@ -52,7 +53,8 @@ public class OfferResource {
 		Offer result = getOffer(id);
 		
 		if (null == result) {
-			return Response.status(404).build();
+			String error = "No Offer exists with id " + id;
+			return Response.status(404).entity(error).build();
 		}
 		
 		return Response.ok(result, MediaType.APPLICATION_JSON).build();
@@ -65,7 +67,8 @@ public class OfferResource {
 		Offer result = getOffer(id);
 		
 		if (null == result) {
-			return Response.status(404).build();
+			String error = "No Offer exists with id " + id;
+			return Response.status(404).entity(error).build();
 		}
 		
 		return Response.ok(result, MediaType.TEXT_XML).build();
