@@ -40,7 +40,7 @@ public class OfferResource {
 		Offer result = getOffer(id);
 		
 		if (null == result) {
-			String error = "No Offer exists with id " + id;
+			String error = "<error>No Offer exists with id " + id + "</error>";
 			return Response.status(404).entity(error).build();
 		}
 		
