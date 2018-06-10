@@ -20,6 +20,10 @@ public class Offer {
 	private String currency;
 	private Date expiryDate;
 	
+	public Offer() {
+		this(null, null, null);
+	}
+	
 	public Offer(String description, Date offerExpiry, String currency) {
 		super();
 		this.description = description;
